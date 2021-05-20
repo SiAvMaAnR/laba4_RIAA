@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.31205.134
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "laba5_RIAA", "laba5_RIAA.csproj", "{BF6B66BD-6CC4-42AD-82FB-215FF6B51277}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "laba4_RIAA", "laba4_RIAA.csproj", "{BF6B66BD-6CC4-42AD-82FB-215FF6B51277}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
