@@ -92,7 +92,7 @@ namespace laba5_RIAA
             //локальная функция
             double f(double x) => Math.Cos(Math.PI * x / 2);
 
-            int n = 10000;
+            int n = 10000000;
             double a = 0;
             double b = -1;
 
