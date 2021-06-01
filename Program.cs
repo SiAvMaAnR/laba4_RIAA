@@ -14,7 +14,7 @@ namespace laba5_RIAA
             for (var h = (Math.Abs(a) + Math.Abs(b)) / 2.0; ; h /= 2.0)
             {
                 I2 = 0.0;
-                for (var x = a; x <= b; x += h)
+                for (var x = a+h; x <= b; x += h)
                 {
                     I2 += f(x - h) * h;
                 }
@@ -87,7 +87,7 @@ namespace laba5_RIAA
         private static double Trapezoid(Func<double, double> f, double a, double b, double eps)
         {
             double I1 = 0, I2;
-            for (var h = (Math.Abs( a) + Math.Abs(b)) / 2.0; ; h /= 2.0)
+            for (var h = (Math.Abs(a) + Math.Abs(b)) / 2.0; ; h /= 2.0)
             {
                 I2 = 0.0;
                 for (var x = a; x <= b; x += h)
@@ -106,6 +106,7 @@ namespace laba5_RIAA
         static void Main(string[] args)
         {
             Run();
+            Task.Delay(100);
             Console.ReadKey();
         }
 
@@ -113,12 +114,13 @@ namespace laba5_RIAA
         static async void Run()
         {
             //локальная функция
-            double f(double x) => Math.Sin( Math.PI /2 * x);
+            double f(double x) => Math.Sin(2 * Math.PI * x);
 
-            double a = -1;
-            double b = 1;
+            double a = 0;
+            double b = 1.0/4;
             double eps = 0.001;
 
+            Console.WriteLine("");
             Task<double> t1 = Task.Run(() => LeftRectangle(f, a, b, eps));
             Task<double> t2 = Task.Run(() => RightRectangle(f, a, b, eps));
             Task<double> t3 = Task.Run(() => CentralRectangle(f, a, b, eps));
