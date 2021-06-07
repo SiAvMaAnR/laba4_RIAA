@@ -111,7 +111,7 @@ namespace laba5_RIAA
         }
 
 
-        static async void Run()
+        static void Run()
         {
             //локальная функция
             double f(double x) => Math.Sin(2 * Math.PI * x);
@@ -120,21 +120,22 @@ namespace laba5_RIAA
             double b = 1.0/4;
             double eps = 0.001;
 
-            Console.WriteLine("");
-            Task<double> t1 = Task.Run(() => LeftRectangle(f, a, b, eps));
-            Task<double> t2 = Task.Run(() => RightRectangle(f, a, b, eps));
-            Task<double> t3 = Task.Run(() => CentralRectangle(f, a, b, eps));
-            Task<double> t4 = Task.Run(() => Trapezoid(f, a, b, eps));
-            Task<double> t5 = Task.Run(() => Simpson(f, a, b, eps));
+            List<Task<double>> tasks = new List<Task<double>>();
+            tasks.Add(new Task<double>(() => LeftRectangle(f, a, b, eps)));
+            tasks.Add(new Task<double>(() => RightRectangle(f, a, b, eps)));
+            tasks.Add(new Task<double>(() => CentralRectangle(f, a, b, eps)));
+            tasks.Add(new Task<double>(() => Trapezoid(f, a, b, eps)));
+            tasks.Add(new Task<double>(() => Simpson(f, a, b, eps)));
 
+            tasks.ForEach(x=>x.Start());
 
-            await Task.WhenAll(new[] { t1, t2, t3, t4, t5 });
+            Task.WaitAll(tasks.ToArray());
 
-            Console.WriteLine("Формула левых прямоугольников: {0}", t1.Result);
-            Console.WriteLine("Формула правых прямоугольников: {0}", t2.Result);
-            Console.WriteLine("Формула средних прямоугольников: {0}", t3.Result);
-            Console.WriteLine("Формула трапеции: {0}", t4.Result);
-            Console.WriteLine("Формула Симпсона: {0}", t5.Result);
+            Console.WriteLine("Формула левых прямоугольников: {0}", tasks[0].Result);
+            Console.WriteLine("Формула правых прямоугольников: {0}", tasks[1].Result);
+            Console.WriteLine("Формула средних прямоугольников: {0}", tasks[2].Result);
+            Console.WriteLine("Формула трапеции: {0}", tasks[3].Result);
+            Console.WriteLine("Формула Симпсона: {0}", tasks[4].Result);
         }
     }
 }
