@@ -71,9 +71,9 @@ namespace laba5_RIAA
             for (var h = (Math.Abs(a) + Math.Abs(b)) / 2.0; ; h /= 2.0)
             {
                 I2 = 0.0;
-                for (var x = a+h; x <= b; x += h)
+                for (var x = a; x < b; x += h)
                 {
-                    I2 += (f(x - h) + 4 * f(x - h / 2) + f(x)) * h / 6;
+                    I2 += (f(x) + 4 * f(x + h / 2) + f(x - h)) * h / 6;
                 }
 
                 if (Math.Abs(I2 - I1) <= eps)
@@ -92,7 +92,7 @@ namespace laba5_RIAA
                 I2 = 0.0;
                 for (var x = a; x < b; x += h)
                 {
-                    I2 += (f(x) + f(x + h)) / 2 * h;
+                    I2 += (f(x) + f(x + h)) * h / 2;
                 }
 
                 if (Math.Abs(I2 - I1) <= eps)
